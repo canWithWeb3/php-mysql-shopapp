@@ -12,8 +12,8 @@
 
 <?php require "views/_header.php"; ?>
 <?php require "views/_home-products.php"; ?>
-
-
+<?php require "views/_home-comments.php"; ?>
+<?php require "views/_home-brands.php"; ?>
 
 <?php require "views/_footer.php"; ?>
 <?php require "views/_head-finish.php"; ?>

@@ -3,7 +3,8 @@
 <?php 
   require "libs/functions.php";
 
-  $email = $password = $rememberMe = "";
+  $rememberMe = false;
+  $email = $password = "";
   $email_err = $password_err = $error = "";
 
   if(isset($_POST["login"])){
@@ -22,7 +23,7 @@
       $password = $othersClass->control_input($_POST["password"]);
     }
 
-    $rememberMe = $_POST["rememberMe"] ? true : false;
+    $rememberMe = isset($_POST["rememberMe"]) ? true : false;
 
     if(empty($email_err) && empty($password_err)){
       $getUsers = $usersClass->getUsers();
@@ -76,7 +77,13 @@
           </div>
         <?php endif; ?>
 
-        <form method="POST">
+        <div class="alert alert-warning">
+          <h5 class="text-decoration-underline">Admin girişi için:</h5>
+          <p class="mb-0 fw-bold">Email: <span class="fw-normal">admin@gmail.com</span></p>
+          <p class="mb-0 fw-bold">Parola: <span class="fw-normal">admin1</span></p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
           <div class="form-floating mb-3">
             <input name="email" type="text" class="form-control <?php if(!empty($email_err)){ echo "is-invalid"; } ?>" id="email"
               value="<?php if(!empty($email)){ echo $email; } ?>">

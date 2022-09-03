@@ -41,10 +41,12 @@
                 <td class="p-0"><img src="img/<?php echo $product["image"]; ?>" alt="" class="img-fluid"></td>
                 <td><?php echo $product["name"]; ?></td>
                 <td class="cart-product-prices">
-                  <span>$ <?php echo $product["originalPrice"]; ?></span>
-                  <br>
                   <?php if($product["discountPrice"] != 0 ): ?>
-                    <span class="text-secondary text-decoration-line-through">$ <?php echo $product["discountPrice"]; ?></span>
+                    <span class="text-secondary text-decoration-line-through">$ <?php echo $product["originalPrice"]; ?></span>
+                    <br>
+                    <span>$ <?php echo $product["discountPrice"]; ?></span>
+                  <?php else: ?>  
+                    <span>$ <?php echo $product["originalPrice"]; ?></span>
                   <?php endif; ?>
                 </td>
                 <td>

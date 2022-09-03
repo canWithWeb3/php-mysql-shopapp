@@ -20,10 +20,10 @@
 
       if(!$exist){
         if($cartsClass->addProductToCart($user["id"], $_GET["productId"])){
-          header("Location: cart.php");
+          header("Location: product-detail.php?id=".$_GET["productId"]."&alertMessage=productSuccess");
         }
       }else{
-        header("Location: index.php");
+        header("Location: product-detail.php?id=".$_GET["productId"]."&alertMessage=productError");
       }
     }else{
       header("Location: login.php");

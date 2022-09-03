@@ -1,6 +1,7 @@
 <?php 
   
-  
+  $url_array =  explode('/', $_SERVER['REQUEST_URI']) ;
+  $url = end($url_array);  
   
 ?>
 
@@ -28,9 +29,9 @@
   <div class="offcanvas-body">
     
     <div class="list-group">
-      <a href="admin-products.php" class="list-group-item list-group-item-action">Ürünler</a>
-      <a href="admin-categories.php" class="list-group-item list-group-item-action">Kategoriler</a>
-      <a href="admin-users.php" class="list-group-item list-group-item-action">Kullanıcılar</a>
+      <a href="admin-products.php" class="list-group-item list-group-item-action <?php if($url=="admin-products.php"){ echo "active"; } ?>">Ürünler</a>
+      <a href="admin-categories.php" class="list-group-item list-group-item-action <?php if($url=="admin-categories.php"){ echo "active"; } ?>">Kategoriler</a>
+      <a href="admin-users.php" class="list-group-item list-group-item-action <?php if($url=="admin-users.php"){ echo "active"; } ?>">Kullanıcılar</a>
       <a href="logout.php" class="list-group-item list-group-item-action">Çıkış yap</a>
     </div>
 

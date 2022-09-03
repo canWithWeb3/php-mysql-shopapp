@@ -9,6 +9,10 @@ section {
   min-height: 70.9vh;
 }
 
+img{
+  object-fit: cover !important;
+}
+
 input:active, input:focus, textarea:active, textarea:focus {
   box-shadow: none !important;
   border-color: #000 !important;
@@ -47,3 +51,12 @@ input[type="checkbox"]:checked{
   font-size: 18px;
 }
 /* cart finish */
+
+
+/* table start */
+@media (max-width:990px) {
+  .table-description, .table-categories{
+    display: none;
+  }
+}
+/* table finish */

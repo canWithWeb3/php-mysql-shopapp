@@ -85,7 +85,8 @@
         if($productCategoriesClass->addCategoriesToProduct($lastProduct["id"], $categories)){
           header("Location: admin-products.php");
         }else{
-          $error = "Kategoriler Eklenemedi.";
+          $productsClass->deleteProduct($lastProduct["id"]);
+          $error = "Kategori ekleme hatası";
         }
 
       }else{

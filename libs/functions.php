@@ -35,9 +35,9 @@ class Users{
 
   function isAdmin(){
     $checked = false;
-    if(isset($_SESSION["type"]) == "admin"){
+    if(isset($_SESSION["type"]) && $_SESSION["type"] == "admin"){
       $checked = true;
-    }elseif(isset($_COOKIE["type"]) == "admin"){
+    }elseif(isset($_COOKIE["type"]) && $_COOKIE["type"] == "admin"){
       $checked = true;
     }
     return $checked;
@@ -63,10 +63,50 @@ class Users{
     return $result;
   }
 
+  function getUserById($id){
+    require "ayar.php";
+
+    $query = "SELECT * FROM users WHERE id='$id'";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
   function getUserByEmail(string $email){
     require "ayar.php";
 
     $query = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+  function changeImage($id, $image){
+    require "ayar.php";
+
+    $query = "UPDATE users SET image='$image' WHERE id='$id'";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+  function deleteImage($id){
+    require "ayar.php";
+
+    $query = "UPDATE users SET image='profile.png' WHERE id='$id'";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+  function changeUserInfos($id, $nameSurname, $phone, $city, $district, $address){
+    require "ayar.php";
+
+    $query = "UPDATE users SET nameSurname='$nameSurname', phone='$phone', city='$city', district='$district', address='$address' WHERE id='$id'";
     $result = mysqli_query($connection, $query);
 
     mysqli_close($connection);
@@ -295,6 +335,54 @@ class Carts{
 
 }
 
+class Comments{
+
+  function addComment($username, $email, $image, $comment){
+    require "ayar.php";
+
+    $query = "INSERT INTO comments(username,email,image,comment) VALUES ('$username','$email','$image','$comment')";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+  function getLastComment(){
+    require "ayar.php";
+
+    $query = "SELECT * FROM comments ORDER BY id DESC LIMIT 0,1";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+}
+
+class ProductComments{
+
+  function addCommentToProduct($productId, $commentId){
+    require "ayar.php";
+
+    $query = "INSERT INTO product_comment(product_id,comment_id) VALUES ('$productId','$commentId')";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+  function getCommentsByProductId($productId){
+    require "ayar.php";
+
+    $query = "SELECT * FROM product_comment pc inner join comments c on pc.comment_id=c.id WHERE pc.product_id='$productId' ORDER BY id DESC";
+    $result = mysqli_query($connection, $query);
+
+    mysqli_close($connection);
+    return $result;
+  }
+
+}
+
 class Others{
   function control_input($data){
     // $data = strip_tags($data);
@@ -355,6 +443,8 @@ $categoriesClass = new Categories();
 $productsClass = new Products();
 $productCategoriesClass = new ProductCategories();
 $cartsClass = new Carts();
+$commentsClass = new Comments();
+$productCommentsClass = new ProductComments();
 $othersClass = new Others();
 
 ?>

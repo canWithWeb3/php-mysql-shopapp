@@ -36,7 +36,7 @@
           <td><?php echo $category["name"]; ?></td>
           <td>
             <a href="edit-category.php?id=<?php echo $category["id"]; ?>" class="btn btn-warning btn-sm me-3"><i class="fas fa-edit"></i></a>
-            <a href="delete-category.php?id=<?php echo $category["id"]; ?>" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
+            <a data-name="<?php echo $category["name"]; ?>" href="delete-category.php?id=<?php echo $category["id"]; ?>" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></a>
           </td>
         </tr>
       <?php endwhile; ?>  
@@ -45,5 +45,27 @@
 
 </section>
 
+<?php include "views/_cdns.php"; ?>
+
+<script type="text/javascript">
+  $(".btn-danger").click(function(e){
+    e.preventDefault();
+    const name = $(this).data("name");
+    const href = $(this).attr("href");
+
+    swal({
+      title: `Silmek istiyor musunuz?`,
+      text: `${name} kategorisini silmek istiyor musunuz?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        document.location.href = href;    
+      }
+    });
+  })
+</script>
 
 <?php require "views/_head-finish.php"; ?>
