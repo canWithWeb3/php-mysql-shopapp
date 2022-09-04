@@ -3,6 +3,7 @@
 <?php 
   require "libs/functions.php";
 
+  // control
   if(isset($_GET["id"]) && $usersClass->isAdmin()){
     $getCategory = $categoriesClass->getCategoryById($_GET["id"]);
     $category = mysqli_fetch_assoc($getCategory);
@@ -18,7 +19,9 @@
   $name = "";
   $name_err = $error = "";
 
+  // control post
   if(isset($_POST["editCategory"])){
+    // validation name
     if(empty(trim($_POST["name"]))){
       $name_err = "Kategori adı boş bırakılamaz.";
     }elseif(strlen($_POST["name"]) < 3 || strlen($_POST["name"]) > 15){
@@ -27,9 +30,10 @@
       $name = $othersClass->control_input($_POST["name"]);
     }
 
+    // send infos
     if(empty($name_err)){
       if($categoriesClass->editCategory($category["id"], $name)){
-        header("Location: admin-categories.php");
+        header("Location: admin-categories.php?alertType=success&alertMessage=Kategori güncellendi");
       }else{
         $error = "Kategori Düzenlenmedi.";
       }
@@ -46,14 +50,16 @@
 
 <section id="add-category" class="container">
   
-  <div class="col-md-8 mx-auto">
+  <div class="col-lg-8 col-md-10 mx-auto">
     <div class="card">
       <div class="card-header">Kategori Düzenle</div>
       <div class="card-body">
         <div class="row">
           
           <div class="col-md-7">
+            <!-- edit category form -->
             <form method="POST">
+              <!-- name -->
               <div class="mb-3">
                 <label for="name" class="form-label">Kategori Düzenle:</label>
                 <input name="name" id="name" type="text" 
@@ -66,10 +72,10 @@
                 <?php endif; ?>
               </div>
 
+              <!-- submit button -->
               <button type="submit" name="editCategory" class="btn btn-dark">Düzenle</button>
             </form>
           </div>
-          <div class="col-md-5"></div>
 
         </div>
       </div>

@@ -8,7 +8,6 @@
     if($cartsClass->deleteCartProduct($user["id"],$_GET["productId"])){
       header("Location: cart.php");
     }
-    echo "olumsuz";
   }else{
     header("Location: index.php");
     exit;

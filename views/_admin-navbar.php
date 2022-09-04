@@ -6,6 +6,7 @@
 ?>
 
 <div id="admin-navbar">
+  <!-- admin navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="index.php"><img src="img/dark-logo.png" alt="" class="logo-img"></a>
@@ -21,6 +22,7 @@
   </nav>
 </div>
 
+<!-- offCanvasRight Menu -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 id="offcanvasRightLabel">Admin Menu</h5>

@@ -70,13 +70,14 @@
       }
     }
 
-    
+    // validation categories
     if(empty($_POST["categories"])){
       $categories_err = "Kategori seçmediniz";
     }else{
       $categories = $_POST["categories"];
     }
 
+    // send infos
     if(empty($name_err) && empty($image_err) && empty($description_err) && empty($originalPrice_err) && empty($discountPrice_err && empty($categories_err))){
       if($productsClass->addProduct($name, $image, $description, $originalPrice, $discountPrice)){
         $getLastProduct = $productsClass->getLastProduct();
@@ -109,15 +110,19 @@
     <div class="card">
       <div class="card-header">Ürün Ekle</div>
       <div class="card-body">
+        <!-- show error -->
           <?php if(!empty($error)): ?>
             <div class="alert alert-danger">
               <?php echo $error; ?>
             </div>
           <?php endif; ?>  
+          <!-- add product form -->
           <form method="POST" enctype="multipart/form-data">
             <div class="row">
 
+              <!-- text inputs -->
               <div class="col-md-9">
+                  <!-- name -->
                   <div class="mb-3">
                     <label for="name" class="form-label">Ürün Adı:</label>
                     <input type="hidden" value="<?php echo $image; ?>" name="oldImage">
@@ -130,6 +135,7 @@
                       </span>
                     <?php endif; ?>
                   </div>
+                  <!-- image -->
                   <div class="mb-3">
                     <label for="image" class="form-label">Ürün Image:</label>
                     <input type="file" name="image" id="image" 
@@ -141,6 +147,7 @@
                       </span>
                     <?php endif; ?>
                   </div>
+                  <!-- description -->
                   <div class="mb-3">
                     <label for="description" class="form-label">Ürün Açıklama:</label>
                     <textarea name="description" id="description" type="text" 
@@ -151,6 +158,7 @@
                       </span>
                     <?php endif; ?>
                   </div>
+                  <!-- original and discount prices -->
                   <div class="d-flex gap-3 mb-3">
                     <div>
                       <label for="originalPrice" class="form-label">Orjinal Fiyatı:</label>
@@ -175,10 +183,11 @@
                       <?php endif; ?>
                     </div>
                   </div>
-
               </div>
 
+              <!-- checkbox inputs -->
               <div class="col-md-3">
+                <!-- categories -->
                 <div class="card">
                   <div class="card-header">Kategoriler</div>
                   <div class="card-body">
@@ -202,6 +211,7 @@
               </div>
             </div>
 
+            <!-- submit button -->
             <button type="submit" name="addProduct" class="btn btn-dark">Ekle</button>
           </form>
       </div>
@@ -212,4 +222,5 @@
 
 
 
+<?php require "views/_ckeditor.php"; ?>
 <?php require "views/_head-finish.php"; ?>

@@ -33,7 +33,7 @@
 
     if(empty($error)){
       if($usersClass->changeImage($user["id"], $image)){
-        header("Location: index.php");
+        header("Location: profile.php");
       }else{
         $error = "Resim güncelleme hatası";
       }
@@ -42,7 +42,7 @@
 
   if(isset($_POST["deleteImage"])){
     if($usersClass->deleteImage($user["id"])){
-      header("Location: index.php");
+      header("Location: profile.php");
     }else{
       $error = "Kullanıcı resmi silme hatası";
     }

@@ -7,8 +7,9 @@
   $email = $password = "";
   $email_err = $password_err = $error = "";
 
+  // control post
   if(isset($_POST["login"])){
-
+    // validation email
     if(empty(trim($_POST["email"]))){
       $email_err = "Email boş geçilemez.";
     }elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
@@ -17,12 +18,14 @@
       $email = $othersClass->control_input($_POST["email"]);
     }
 
+    // validation password
     if(empty(trim($_POST["password"]))){
       $password_err = "Parola boş geçilemez.";
     }else{
       $password = $othersClass->control_input($_POST["password"]);
     }
-
+    
+    // validation email
     $rememberMe = isset($_POST["rememberMe"]) ? true : false;
 
     if(empty($email_err) && empty($password_err)){
@@ -38,13 +41,13 @@
             $_SESSION["message"] = "Giriş yapıldı.";
             $_SESSION["type"] = "success";
 
-            header("Location: index.php");
+            header("Location: index.php?alertType=success&alertMessage=Giriş+yapıldı");
           }else{
             $_SESSION["username"] = $username;
             $_SESSION["email"] = $email;
             $_SESSION["type"] = $user["type"];
   
-            header("Location: index.php");
+            header("Location: index.php?alertType=success&alertMessage=Giriş+yapıldı");
           }
 
           $checked = true;
@@ -71,19 +74,23 @@
       <div class="card-body">
         <h3 class="mb-4">Giriş Yap</h3>
 
+        <!-- show error -->
         <?php if(!empty($error)): ?>
           <div class="alert alert-danger">
             <?php echo $error; ?>
           </div>
         <?php endif; ?>
 
+        <!-- admin infos -->
         <div class="alert alert-warning">
           <h5 class="text-decoration-underline">Admin girişi için:</h5>
           <p class="mb-0 fw-bold">Email: <span class="fw-normal">admin@gmail.com</span></p>
           <p class="mb-0 fw-bold">Parola: <span class="fw-normal">admin1</span></p>
         </div>
 
+        <!-- login form -->
         <form method="POST" enctype="multipart/form-data">
+          <!-- email -->
           <div class="form-floating mb-3">
             <input name="email" type="text" class="form-control <?php if(!empty($email_err)){ echo "is-invalid"; } ?>" id="email"
               value="<?php if(!empty($email)){ echo $email; } ?>">
@@ -94,6 +101,7 @@
               </span>
             <?php endif; ?>
           </div>
+          <!-- password -->
           <div class="form-floating mb-3">
             <input name="password" type="password" class="form-control <?php if(!empty($password_err)){ echo "is-invalid"; } ?>" id="password"
               value="<?php if(!empty($password)){ echo $password; } ?>">
@@ -104,14 +112,14 @@
               </span>
             <?php endif; ?>
           </div>
-
+          <!-- rememberMe -->
           <div class="form-check mb-3">
             <label for="rememberMe" class="form-check-label">Beni hatırla</label>
             <input type="checkbox" name="rememberMe" id="rememberMe" class="form-check-input">
           </div>
 
+          <!-- submit button -->
           <button type="submit" name="login" class="btn btn-dark">Giriş Yap</button>
-          <!-- <button id="udemy" type="button" class="btn btn-primary">Swal</button> -->
         </form>
       </div>
     </div>

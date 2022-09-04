@@ -385,12 +385,12 @@ class ProductComments{
 
 class Others{
   function control_input($data){
-    // $data = strip_tags($data);
-    $data = htmlspecialchars($data);
-    // $title = htmlentities($data);
-    $data = trim(stripslashes($data)); # sql injection
+    $data = strip_tags($data);
+    // $data = htmlspecialchars($data);
+    // $data = htmlentities($data);
+    $data = stripslashes($data); # sql injection
 
-    return $data;
+    return trim($data);
   }
 
   function saveImage($file) {

@@ -16,6 +16,7 @@
 
 <section id="admin-users" class="container">
 
+  <!-- user table -->
   <table class="table table-striped table-bordered table-sm mb-0">
     <thead>
       <tr>

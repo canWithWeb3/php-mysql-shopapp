@@ -77,6 +77,7 @@
 <?php require "views/_message.php"; ?>
 <?php require "views/_navbar.php"; ?>
 
+<!-- for alert -->
 <?php if(isset($_GET["alertMessage"])): ?>
   <div class="type" data-type="<?php echo $_GET["alertMessage"]; ?>"></div>
 <?php endif; ?>  
@@ -84,11 +85,11 @@
 <section id="product-detail" class="container">
 
   <div class="row">
-
+    <!-- product image -->
     <div class="col-md-3">
       <img src="img/<?php echo $product["image"]; ?>" alt="" class="img-fluid">
     </div>
-
+    <!-- product details -->
     <div class="col-md-7">
       <h2><?php echo $product["name"]; ?></h2>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio modi, vitae in, nobis blanditiis sunt, a ad alias laborum omnis temporibus autem pariatur? Unde at odio, atque similique itaque saepe autem quisquam est ab possimus deleniti! Necessitatibus, ipsa.</p>
@@ -100,6 +101,8 @@
           <span>$<?php echo $product["originalPrice"]; ?></span>
         <?php endif; ?>
       </div>
+      
+      <!-- add to cart link -->
       <a href="addProductToCart.php?productId=<?php echo $product["id"]; ?>" class="btn btn-outline-dark">Sepete Ekle</a>
     </div>
 
@@ -169,28 +172,24 @@
       swal({
         title: `Ürün eklendi`,
         icon: "success",
-        buttons: true,
       })
     }
     if(type == "productError"){
       swal({
         title: `Ürün zaten eklenmiş`,
         icon: "error",
-        buttons: true,
       })
     }
     if(type == "commentSuccess"){
       swal({
         title: `Yorum eklendi.`,
         icon: "success",
-        buttons: true,
       })
     }
     if(type == "commentError"){
       swal({
         title: `Yorum eklenemedi.`,
         icon: "error",
-        buttons: true,
       })
     }
   }else{

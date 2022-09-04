@@ -2,6 +2,14 @@
   
   $getCategoriesResult = $categoriesClass->getCategories();
   
+  if($usersClass->isLogged()){
+    $userResult = $usersClass->getLogged();
+    $user = mysqli_fetch_assoc($userResult);
+  
+    $userCart = $cartsClass->getUserCart($user["id"]);
+  
+    $count = mysqli_num_rows($userCart);
+  }
 ?>
 
 <div id="navbar">
@@ -31,8 +39,12 @@
                   <li><a class="dropdown-item" href="logout.php">Çıkış yap</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+              <li class="nav-item position-relative">
+                <a class="nav-link" href="cart.php"><i class="fas fa-shopping-cart"></i> 
+                  <span class="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
+                    <?php echo $count; ?>
+                  </span>
+                </a>
               </li>
             </ul>
           <?php else: ?>  
@@ -48,10 +60,10 @@
               </li>
             </ul>
           <?php endif; ?>  
-        <!-- <form class="d-flex">
+        <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-dark" type="submit">Search</button>
-        </form> -->
+        </form>
       </div>
     </div>
   </nav>

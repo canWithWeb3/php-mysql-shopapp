@@ -241,4 +241,5 @@
 
 
 
+<?php require "views/_ckeditor.php"; ?>
 <?php require "views/_head-finish.php"; ?>
